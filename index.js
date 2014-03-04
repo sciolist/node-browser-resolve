@@ -116,11 +116,13 @@ function resolve(id, opts, cb) {
     opts = opts || {};
 
     var base = path.dirname(opts.filename);
-    var paths = nodeModulesPaths(base);
-
+    var paths = [];
+    
     if (opts.paths) {
         paths.push.apply(paths, opts.paths);
     }
+
+    paths.push.apply(paths, nodeModulesPaths(base));
 
     paths = paths.map(function(p) {
         return path.dirname(p);
